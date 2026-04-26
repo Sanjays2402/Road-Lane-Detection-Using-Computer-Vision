@@ -1,4 +1,4 @@
-# 🛣️ Road Lane Detection
+# Road Lane Detection
 
 [![Tests](https://github.com/Sanjays2402/Road-Lane-Detection-Using-Computer-Vision/actions/workflows/tests.yml/badge.svg)](https://github.com/Sanjays2402/Road-Lane-Detection-Using-Computer-Vision/actions/workflows/tests.yml)
 ![Python](https://img.shields.io/badge/Python-3.9%2B-3776AB?style=flat&logo=python&logoColor=white)
@@ -48,7 +48,7 @@ bgr = cv2.imread("dashcam.jpg")
 rgb = cv2.cvtColor(bgr, cv2.COLOR_BGR2RGB)
 
 overlay = detector.process(rgb)
-print(overlay.left, overlay.right)        # slope/intercept (or None)
+print(overlay.left, overlay.right) # slope/intercept (or None)
 cv2.imwrite("out.jpg", cv2.cvtColor(overlay.image, cv2.COLOR_RGB2BGR))
 ```
 
@@ -74,17 +74,17 @@ lane-detect video drive.mp4 -o drive_lanes.mp4 --smoothing 0.1
 
 ```
 Input frame (RGB)
-  → HLS color filter (white + yellow)
-  → Grayscale
-  → Gaussian blur (5×5)
-  → Canny edge detection (50 / 150)
-  → Trapezoidal ROI mask
-  → Probabilistic Hough transform
-  → Slope filtering & sign-based left/right split
-  → Per-side averaging in slope-intercept space
-  → (Video) Exponential smoothing across frames
-  → Extrapolate to image-bottom + horizon
-  → Weighted overlay
+ → HLS color filter (white + yellow)
+ → Grayscale
+ → Gaussian blur (5×5)
+ → Canny edge detection (50 / 150)
+ → Trapezoidal ROI mask
+ → Probabilistic Hough transform
+ → Slope filtering & sign-based left/right split
+ → Per-side averaging in slope-intercept space
+ → (Video) Exponential smoothing across frames
+ → Extrapolate to image-bottom + horizon
+ → Weighted overlay
 ```
 
 ## Configuration
@@ -93,12 +93,12 @@ Every knob lives on `LaneDetectorConfig`. Some useful ones:
 
 ```python
 LaneDetectorConfig(
-    use_color_filter=True,     # turn off to compare against the classical pipeline
-    canny_low=50, canny_high=150,
-    hough_threshold=20, hough_min_line_len=20, hough_max_line_gap=300,
-    min_abs_slope=0.4, max_abs_slope=2.0,
-    smoothing_alpha=0.2,       # None disables smoothing
-    line_color=(255, 0, 0), line_thickness=10,
+ use_color_filter=True, # turn off to compare against the classical pipeline
+ canny_low=50, canny_high=150,
+ hough_threshold=20, hough_min_line_len=20, hough_max_line_gap=300,
+ min_abs_slope=0.4, max_abs_slope=2.0,
+ smoothing_alpha=0.2, # None disables smoothing
+ line_color=(255, 0, 0), line_thickness=10,
 )
 ```
 
@@ -125,15 +125,15 @@ Tests use synthetic images, so they don't depend on the original Udacity footage
 
 ```
 lane_detection/
-├── __init__.py        # public API
-├── pipeline.py        # LaneDetector + LaneOverlay
-├── color.py           # HLS white/yellow mask
-├── roi.py             # fractional trapezoidal ROI
-├── lines.py           # slope/intercept geometry
-└── cli.py             # `lane-detect` entrypoint
+├── __init__.py # public API
+├── pipeline.py # LaneDetector + LaneOverlay
+├── color.py # HLS white/yellow mask
+├── roi.py # fractional trapezoidal ROI
+├── lines.py # slope/intercept geometry
+└── cli.py # `lane-detect` entrypoint
 tests/
-└── test_pipeline.py   # 12 cases: synthetic + edge cases
-Finding Lane Lines- CARND-Term-1- Submission.ipynb   # original notebook (kept for archival)
+└── test_pipeline.py # 12 cases: synthetic + edge cases
+Finding Lane Lines- CARND-Term-1- Submission.ipynb # original notebook (kept for archival)
 ```
 
 ## Limitations
